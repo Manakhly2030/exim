@@ -186,7 +186,7 @@ frappe.ui.form.on("Sales Invoice", {
         //         })
         //     }
         // })
-        // frm.events.cal_igst_amount(frm);
+        frm.trigger('cal_igst_amount');
         frm.trigger('calculate_total_fob_value');
         frm.trigger("duty_drawback_cal");
         frm.trigger("meis_cal");
@@ -282,11 +282,11 @@ frappe.ui.form.on("Sales Invoice", {
             });
         }
     },
-    /*
+
     cal_igst_amount: function (frm) {
         let total_igst = 0.0;
-        frappe.model.get_value('Address', {"name":frm.doc.customer_address}, 'country',(res)=>{
-            if(res.country != "India"){
+        
+            if(frm.doc.gst_category == "Overseas"){
                 frm.doc.items.forEach(function (d) {
                     if (d.igst_rate) {
                         frappe.model.set_value(d.doctype, d.name, 'igst_amount', d.base_amount * parseInt(d.igst_rate) / 100);
@@ -297,9 +297,8 @@ frappe.ui.form.on("Sales Invoice", {
                 });
                 frm.set_value('total_igst_amount', total_igst);
             }
-        })
     },
-    */
+
     duty_drawback_cal: function (frm) {
         let total_dt = 0;
      
@@ -524,18 +523,18 @@ frappe.ui.form.on("Sales Invoice Item", {
 
         //     frm.events.meis_cal(frm);
         // }
-        // frm.events.cal_igst_amount(frm);
+        frm.events.cal_igst_amount(frm);
         //frappe.model.set_value(cdt, cdn, "igst_taxable_value", d.fob_value);
     },
 
-	/* igst_taxable_value: function(frm, cdt, cdn){
+	igst_taxable_value: function(frm, cdt, cdn){
 		frm.events.cal_igst_amount(frm);
 	},
 
     igst_rate: function (frm, cdt, cdn) {
         frm.events.cal_igst_amount(frm);
     },
-    */
+
 });
 
 frappe.ui.form.on('Notify Party Address', {
