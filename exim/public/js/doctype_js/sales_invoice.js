@@ -189,14 +189,6 @@ frappe.ui.form.on("Sales Invoice", {
             frm.set_value("total_meis", total_meis);
         }
     },
-    calculate_insurance: function (frm) {
-        if (frm.doc.gst_category == "Overseas") {
-            frm.doc.items.forEach(function (d) {
-                
-            });
-            frm.refresh_field("items");
-        }
-    },
     run_all_calculation: function (frm) {
         frappe.run_serially([
             () => frm.trigger("caclulate_total"),
