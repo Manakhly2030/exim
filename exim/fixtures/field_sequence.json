@@ -721,7 +721,7 @@
  },
  {
   "add_fields_before_section": "taxes_section",
-  "apply_changes": 0,
+  "apply_changes": 1,
   "doc_type": "Sales Invoice",
   "docstatus": 0,
   "doctype": "Field Sequence",
@@ -743,6 +743,13 @@
    {
     "doc_type": "Sales Invoice",
     "field_name": "freight",
+    "parent": "Sales Invoice",
+    "parentfield": "field_sequence_table",
+    "parenttype": "Field Sequence"
+   },
+   {
+    "doc_type": "Sales Invoice",
+    "field_name": "insurance_percentage",
     "parent": "Sales Invoice",
     "parentfield": "field_sequence_table",
     "parenttype": "Field Sequence"
@@ -1140,13 +1147,13 @@
     "parenttype": "Field Sequence"
    }
   ],
-  "modified": "2024-02-16 14:28:58.782048",
+  "modified": "2024-05-08 17:05:52.887118",
   "module": "Exim",
   "name": "Sales Invoice"
  },
  {
   "add_fields_before_section": "quantity_and_rate",
-  "apply_changes": 0,
+  "apply_changes": 1,
   "doc_type": "Sales Invoice Item",
   "docstatus": 0,
   "doctype": "Field Sequence",
@@ -1238,20 +1245,6 @@
    {
     "doc_type": "Sales Invoice Item",
     "field_name": "fob_value",
-    "parent": "Sales Invoice Item",
-    "parentfield": "field_sequence_table",
-    "parenttype": "Field Sequence"
-   },
-   {
-    "doc_type": "Sales Invoice Item",
-    "field_name": "igst_rate",
-    "parent": "Sales Invoice Item",
-    "parentfield": "field_sequence_table",
-    "parenttype": "Field Sequence"
-   },
-   {
-    "doc_type": "Sales Invoice Item",
-    "field_name": "igst_amount",
     "parent": "Sales Invoice Item",
     "parentfield": "field_sequence_table",
     "parenttype": "Field Sequence"
@@ -1404,7 +1397,7 @@
     "parenttype": "Field Sequence"
    }
   ],
-  "modified": "2024-02-16 14:28:29.662379",
+  "modified": "2024-05-08 17:16:15.148608",
   "module": "Exim",
   "name": "Sales Invoice Item"
  }
