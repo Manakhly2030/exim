@@ -1,5 +1,4 @@
 this.frm.cscript.onload = function (frm) {
-
     // Billing Address Filter
     this.frm.set_query("customer_address", function () {
         return {
@@ -23,13 +22,7 @@ this.frm.cscript.onload = function (frm) {
             filters: { link_doctype: "Customer", link_name: cur_frm.doc.customer }
         };
     });
-    // this.frm.fields_dict.items.grid.get_field("ref_no").get_query = function (doc) {
-    //     return {
-    //         filters: {
-    //             "product_name": doc.items.item_code,
-    //         }
-    //     }
-    // };
+
     cur_frm.fields_dict.items.grid.get_field("ref_no").get_query = function (doc, cdt, cdn) {
         let d = locals[cdt][cdn];
         return {
@@ -43,7 +36,6 @@ this.frm.cscript.onload = function (frm) {
 frappe.ui.form.on("Sales Order", {
     before_save: function (frm) {
         frm.trigger("cal_total");
-        // frm.trigger("box_cal");
         frappe.call({
             method: 'exim.api.company_address',
             args: {

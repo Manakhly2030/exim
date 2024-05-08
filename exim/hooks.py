@@ -150,11 +150,10 @@ fixtures = [
 
 doc_events = {
     "Sales Invoice": {
-        "on_submit": "exim.api.si_on_submit",
-        "on_cancel": "exim.api.si_on_cancel",
-        "before_save": "exim.api.si_before_save",
-        "validate": "exim.api.si_validate",
-        "on_update": "exim.exim.doc_events.sales_invoice.cal_total",
+        "before_save": "exim.exim.doc_events.sales_invoice.before_save",
+        "validate": "exim.exim.doc_events.sales_invoice.validate",
+        "on_submit": "exim.exim.doc_events.sales_invoice.on_submit",
+        "on_cancel": "exim.exim.doc_events.sales_invoice.on_cancel",
     },
     "Purchase Invoice": {
         "on_submit": "exim.api.pi_on_submit",
