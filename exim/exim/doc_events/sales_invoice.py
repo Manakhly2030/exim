@@ -51,7 +51,7 @@ def calculate_total(self):
 		row.total_tare_weight = flt(row.tare_wt * row.no_of_packages)
 		row.gross_wt = flt(row.total_tare_weight) + flt(row.qty)
 		
-		if self.insurance_percentage and self.gst_category == "Overseas"
+		if self.insurance_percentage and self.gst_category == "Overseas":
 			row.insurance = flt(row.amount * self.insurance_percentage / 100.0)
 		
 		if not self.manually_enter_fob_value and self.gst_category == "Overseas":
