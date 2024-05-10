@@ -134,7 +134,7 @@ frappe.ui.form.on("Sales Invoice", {
             d.total_tare_weight = d.tare_wt * d.no_of_packages;
             d.gross_wt = d.total_tare_weight + d.qty;
             
-            if ((frm.doc.gst_category == "Overseas") && (!frm.doc.insurance_percentage)) {
+            if ((frm.doc.gst_category == "Overseas") && (frm.doc.insurance_percentage != 0.0)) {
                 d.insurance = flt(d.amount * frm.doc.insurance_percentage / 100.0);
             }
             
