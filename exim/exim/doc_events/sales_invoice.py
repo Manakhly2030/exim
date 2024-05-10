@@ -37,12 +37,15 @@ def calculate_total(self):
 	total_rodtep = 0
 	total_fob_value = 0
 
+	if self.gst_category == "Overseas" and not self.manually_enter_fob_value and self.freight_calculated in ["By Qty", "By Amount"] and self.shipping_terms not in ["CIF", "CFR", "CNF", "CPT"]:
+		frappe.msgprint(f"To calculate item wise freight please ensure shipping terms are set either of {frappe.bold('CIF, CFR, CNF OR CPT')}.")
+
 	for row in self.items:
 		if self.freight_calculated == "By Qty":
 			row.freight = (row.qty * self.freight) / self.total_qty
 		elif self.freight_calculated == "By Amount":
 			row.freight = (row.base_amount * self.freight) / self.base_total
-		elif self.freight_calculated == "Manual":
+		else:
 			total_freight += flt(row.freight)
 		
 		total_qty += flt(row.qty)
