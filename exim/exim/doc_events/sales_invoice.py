@@ -270,10 +270,10 @@ def cancel_jv(self):
 		if self.duty_drawback_jv:
 			jv = frappe.get_doc("Journal Entry", self.duty_drawback_jv)
 			jv.cancel()
-			self.duty_drawback_jv = ''
+			self.db_set('duty_drawback_jv','')
 	if meta.has_field('meis_jv'):
 		if self.get('meis_jv'):
 			jv = frappe.get_doc("Journal Entry", self.meis_jv)
 			jv.cancel()
-			self.meis_jv = ''
+			self.db_set('meis_jv','')
 
