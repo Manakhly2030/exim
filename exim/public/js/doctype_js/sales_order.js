@@ -90,17 +90,17 @@ frappe.ui.form.on("Sales Order", {
     cal_total: function (frm) {
         let total_qty = 0.0;
         let total_gr_wt = 0.0;
-        let total_packages = 0.0;
+        // let total_packages = 0.0;
 
         frm.doc.items.forEach(function (d) {
             total_qty += flt(d.qty);
             total_gr_wt += flt(d.gross_wt);
-            total_packages += flt(d.no_of_packages);
+            // total_packages += flt(d.no_of_packages);
         });
 
         frm.set_value("total_qty", total_qty);
         frm.set_value("total_gr_wt", total_gr_wt);
-        frm.set_value("total_packages", total_packages);
+        // frm.set_value("total_packages", total_packages);
     },
     box_cal: function (frm) {
         frm.doc.items.forEach(function (d, i) {

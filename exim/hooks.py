@@ -140,7 +140,7 @@ accounts_controller.get_due_date = get_due_date
 # fixtures = ["Custom Field"]
 
 fixtures = [
-    {"dt": "Custom Field", "filters": [["module", "in", ["Exim"]], ["dt", "not in", ["Sales Invoice"]]]},
+    {"dt": "Custom Field", "filters": [["module", "in", ["Exim"]], ["dt", "not in", ["Sales Invoice", "Sales Invoice Item", "Delivery Note", "Delivery Note Item", "Sales Order", "Sales Order Item"]]]},
     # {"dt": "Property Setter", "filters": [["module", "in", ["Exim"]]]},
     {"dt": "Field Sequence", "filters": [["module", "in", ["Exim"]]]},
 ]
