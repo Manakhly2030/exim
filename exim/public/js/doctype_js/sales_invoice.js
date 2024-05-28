@@ -343,11 +343,11 @@ frappe.ui.form.on("Sales Invoice Item", {
             }
         })
     },
-    pallet_size: function (frm, cdt, cdn) {
+    total_pallets: function (frm, cdt, cdn) {
         frappe.run_serially([
             () => {
                 let d = locals[cdt][cdn];
-                frappe.model.set_value(cdt, cdn, "total_pallets", Math.round(d.qty / d.pallet_size));
+                frappe.model.set_value(cdt, cdn, "pallet_size", Math.round(d.qty / d.total_pallets));
             },
             () => {
                 frm.events.pallet_cal(frm);
