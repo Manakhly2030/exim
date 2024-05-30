@@ -126,17 +126,16 @@ frappe.ui.form.on("Sales Invoice", {
         frm.doc.items.forEach(function (d) {
             if (frm.doc.freight_calculated == "By Qty") {
                 d.freight = frm.doc.freight * d.qty / frm.doc.total_qty;
+                d.insurance = frm.doc.insurance * d.qty / frm.doc.total_qty;
             }
             else if (frm.doc.freight_calculated == "By Amount") {
                 d.freight = frm.doc.freight * d.base_amount / frm.doc.base_total;
+                d.insurance = frm.doc.insurance * d.base_amount / frm.doc.base_total;
             }
             
             d.total_tare_weight = d.tare_wt * d.no_of_packages;
-            let pallet = d.pallet_weight * d.total_pallets
-            d.gross_wt = d.total_tare_weight + d.qty + pallet;            
-            if ((frm.doc.gst_category == "Overseas") && (frm.doc.insurance_percentage != 0.0)) {
-                d.insurance = flt(d.amount * frm.doc.insurance_percentage / 100.0);
-            }
+            let pallet = d.pallet_weight * d.total_pallets;
+            d.gross_wt = d.total_tare_weight + d.qty + pallet;
             
             if ((frm.doc.gst_category == "Overseas") && (!frm.doc.manually_enter_fob_value)) {
                 if (['CIF', 'CFR', 'CNF', 'CPT'].indexOf(cur_frm.doc.shipping_terms) != -1){

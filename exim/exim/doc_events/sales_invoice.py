@@ -43,10 +43,13 @@ def calculate_total(self):
 	for row in self.items:
 		if self.freight_calculated == "By Qty":
 			row.freight = (row.qty * self.freight) / self.total_qty
+			row.insurance = (row.qty * self.insurance) / self.total_qty
 		elif self.freight_calculated == "By Amount":
 			row.freight = (row.base_amount * self.freight) / self.base_total
+			row.insurance = (row.base_amount * self.insurance) / self.base_total
 		else:
 			total_freight += flt(row.freight)
+			total_insurance += flt(row.insurance)
 		
 		total_qty += flt(row.qty)
 		total_packages += flt(row.no_of_packages)
@@ -54,9 +57,6 @@ def calculate_total(self):
 		row.total_tare_weight = flt(row.tare_wt * row.no_of_packages)
 		pallet = row.pallet_weight * row.total_pallets
 		row.gross_wt = flt(row.total_tare_weight) + flt(row.qty) + flt(pallet)
-		
-		if self.insurance_percentage and self.gst_category == "Overseas":
-			row.insurance = flt(row.amount * self.insurance_percentage / 100.0)
 		
 		if not self.manually_enter_fob_value and self.gst_category == "Overseas":
 			if self.shipping_terms in ["CIF", "CFR", "CNF", "CPT"]:
@@ -79,7 +79,7 @@ def calculate_total(self):
 	self.total_tare_wt = total_tare_wt
 	if self.freight_calculated == "Manual":
 		self.freight = total_freight
-	self.insurance = total_insurance
+		self.insurance = total_insurance
 	self.total_meis = total_meis
 	self.total_fob_value = total_fob_value
 

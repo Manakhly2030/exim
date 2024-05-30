@@ -29,17 +29,15 @@ frappe.ui.form.on("Delivery Note", {
         frm.doc.items.forEach(function (d) {
             if (frm.doc.freight_calculated == "By Qty") {
                 d.freight = frm.doc.freight * d.qty / frm.doc.total_qty;
+                d.insurance = frm.doc.insurance * d.qty / frm.doc.total_qty;
             }
             else if (frm.doc.freight_calculated == "By Amount") {
                 d.freight = frm.doc.freight * d.base_amount / frm.doc.base_total;
+                d.insurance = frm.doc.insurance * d.base_amount / frm.doc.base_total;
             }
             
             d.total_tare_weight = d.tare_wt * d.no_of_packages;
             d.gross_wt = d.total_tare_weight + d.qty;
-            
-            if ((frm.doc.gst_category == "Overseas") && (!frm.doc.insurance_percentage)) {
-                d.insurance = flt(d.amount * frm.doc.insurance_percentage / 100.0);
-            }
             
             if ((frm.doc.gst_category == "Overseas") && (!frm.doc.manually_enter_fob_value)) {
                 if (['CIF', 'CFR', 'CNF', 'CPT'].indexOf(cur_frm.doc.shipping_terms) != -1){
