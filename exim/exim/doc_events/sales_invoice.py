@@ -55,7 +55,8 @@ def calculate_total(self):
 		total_packages += flt(row.no_of_packages)
 
 		row.total_tare_weight = flt(row.tare_wt * row.no_of_packages)
-		pallet = row.pallet_weight * row.total_pallets
+		
+		pallet = flt(row.pallet_weight) * flt(row.total_pallets)
 		row.gross_wt = flt(row.total_tare_weight) + flt(row.qty) + flt(pallet)
 		
 		if not self.manually_enter_fob_value and self.gst_category == "Overseas":
