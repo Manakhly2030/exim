@@ -20,7 +20,7 @@ frappe.ui.form.on("Delivery Note", {
     caclulate_total: function (frm) {
         let total_qty = 0;
         let total_packages = 0;
-        let total_gr_wt = 0;
+        let total_gross_wt = 0;
         let total_tare_wt = 0;
         let total_freight = 0;
         let total_insurance = 0;
@@ -51,7 +51,7 @@ frappe.ui.form.on("Delivery Note", {
             total_qty += flt(d.qty);
             total_packages += flt(d.no_of_packages);
             total_tare_wt += flt(d.total_tare_weight);
-            total_gr_wt += flt(d.gross_wt);
+            total_gross_wt += flt(d.gross_wt);
             total_freight += flt(d.freight);
             total_insurance += flt(d.insurance);
         });
@@ -60,7 +60,7 @@ frappe.ui.form.on("Delivery Note", {
 
         frm.set_value("total_qty", total_qty);
         frm.set_value("total_packages", total_packages);
-        frm.set_value("total_gr_wt", total_gr_wt);
+        frm.set_value("total_gross_wt", total_gross_wt);
         frm.set_value("total_tare_wt", total_tare_wt);
         if (!((frm.doc.freight_calculated == "By Qty") || (frm.doc.freight_calculated == "By Amount"))) {
             frm.set_value("freight", total_freight);
