@@ -79,22 +79,22 @@ frappe.ui.form.on("Delivery Note", {
             frm.set_value("total_duty_drawback", total_dt);
         }
     },
-    meis_calculation: function (frm) {
-        if (frm.doc.gst_category == "Overseas") {
-            let total_meis = 0.0;
-            frm.doc.items.forEach(function (d) {
-                d.meis_value = flt(d.fob_value * d.meis_rate / 100.0);
-                total_meis += flt(d.meis_value)
-            });
-            frm.refresh_field("items");
-            frm.set_value("total_meis", total_meis);
-        }
-    },
+    // meis_calculation: function (frm) {
+    //     if (frm.doc.gst_category == "Overseas") {
+    //         let total_meis = 0.0;
+    //         frm.doc.items.forEach(function (d) {
+    //             d.meis_value = flt(d.fob_value * d.meis_rate / 100.0);
+    //             total_meis += flt(d.meis_value)
+    //         });
+    //         frm.refresh_field("items");
+    //         frm.set_value("total_meis", total_meis);
+    //     }
+    // },
     run_all_calculation: function (frm) {
         frappe.run_serially([
             () => frm.trigger("caclulate_total"),
             () => frm.trigger("duty_calculation"),
-            () => frm.trigger("meis_calculation"),
+            // () => frm.trigger("meis_calculation"),
         ]);
     },
     before_save: function (frm) {
