@@ -198,11 +198,22 @@ frappe.ui.form.on("Delivery Note Item", {
         frappe.model.set_value(cdt, cdn, "no_of_packages", flt(d.qty / d.packing_size));
         }
     },
-    pallet_size: function (frm, cdt, cdn) {
+    // pallet_size: function (frm, cdt, cdn) {
+    //     frappe.run_serially([
+    //         () => {
+    //             let d = locals[cdt][cdn];
+    //             frappe.model.set_value(cdt, cdn, "total_pallets", Math.round(flt(d.qty) / flt(d.pallet_size)));
+    //         },
+    //         () => {
+    //             frm.events.pallet_cal(frm);
+    //         }
+    //     ]);
+    // },
+    total_pallets: function (frm, cdt, cdn) {
         frappe.run_serially([
             () => {
                 let d = locals[cdt][cdn];
-                frappe.model.set_value(cdt, cdn, "total_pallets", Math.round(flt(d.qty) / flt(d.pallet_size)));
+                frappe.model.set_value(cdt, cdn, "pallet_size", Math.round(d.qty / d.total_pallets));
             },
             () => {
                 frm.events.pallet_cal(frm);
