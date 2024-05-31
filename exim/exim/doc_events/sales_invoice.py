@@ -36,6 +36,7 @@ def calculate_total(self):
 	total_drawback = 0
 	total_rodtep = 0
 	total_fob_value = 0
+	total_pallets = 0
 
 	if self.gst_category == "Overseas" and not self.manually_enter_fob_value and self.freight_calculated in ["By Qty", "By Amount"] and self.shipping_terms not in ["CIF", "CFR", "CNF", "CPT"]:
 		frappe.msgprint(f"To calculate item wise freight please ensure shipping terms are set either of {frappe.bold('CIF, CFR, CNF OR CPT')}.")
@@ -73,6 +74,7 @@ def calculate_total(self):
 		row.total_duty_drawback = total_drawback
 		total_rodtep += row.meis_value
 		total_fob_value += flt(row.fob_value)
+		total_pallets += flt(row.total_pallets)
 	
 	self.total_qty = total_qty
 	self.total_packages = total_packages
@@ -83,6 +85,7 @@ def calculate_total(self):
 		self.insurance = total_insurance
 	self.total_meis = total_meis
 	self.total_fob_value = total_fob_value
+	self.total_pallets = total_pallets
 
 
 def duty_calculation(self):

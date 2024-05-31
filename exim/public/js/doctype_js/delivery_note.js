@@ -25,6 +25,7 @@ frappe.ui.form.on("Delivery Note", {
         let total_freight = 0;
         let total_insurance = 0;
         let total_fob_value = 0;
+        let total_pallets = 0;
 
         frm.doc.items.forEach(function (d) {
             if (frm.doc.freight_calculated == "By Qty") {
@@ -54,6 +55,7 @@ frappe.ui.form.on("Delivery Note", {
             total_gross_wt += flt(d.gross_wt);
             total_freight += flt(d.freight);
             total_insurance += flt(d.insurance);
+            total_pallets += flt(d.total_pallets);
         });
 
         frm.refresh_field("items");
@@ -62,6 +64,7 @@ frappe.ui.form.on("Delivery Note", {
         frm.set_value("total_packages", total_packages);
         frm.set_value("total_gross_wt", total_gross_wt);
         frm.set_value("total_tare_wt", total_tare_wt);
+        frm.set_value("total_pallets", total_pallets);
         if (!((frm.doc.freight_calculated == "By Qty") || (frm.doc.freight_calculated == "By Amount"))) {
             frm.set_value("freight", total_freight);
         }
@@ -198,11 +201,22 @@ frappe.ui.form.on("Delivery Note Item", {
         frappe.model.set_value(cdt, cdn, "no_of_packages", flt(d.qty / d.packing_size));
         }
     },
-    pallet_size: function (frm, cdt, cdn) {
+    // pallet_size: function (frm, cdt, cdn) {
+    //     frappe.run_serially([
+    //         () => {
+    //             let d = locals[cdt][cdn];
+    //             frappe.model.set_value(cdt, cdn, "total_pallets", Math.round(flt(d.qty) / flt(d.pallet_size)));
+    //         },
+    //         () => {
+    //             frm.events.pallet_cal(frm);
+    //         }
+    //     ]);
+    // },
+    total_pallets: function (frm, cdt, cdn) {
         frappe.run_serially([
             () => {
                 let d = locals[cdt][cdn];
-                frappe.model.set_value(cdt, cdn, "total_pallets", Math.round(flt(d.qty) / flt(d.pallet_size)));
+                frappe.model.set_value(cdt, cdn, "pallet_size", Math.round(d.qty / d.total_pallets));
             },
             () => {
                 frm.events.pallet_cal(frm);
