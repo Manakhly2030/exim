@@ -146,7 +146,7 @@ def export_lic(self):
 				"quantity": row.qty,
 				"uom": row.uom,
 				"fob_value" : flt(row.fob_value),
-				"currency" : self.currency,
+				"currency" : self.currency,	
 				"shipping_bill_no": self.shipping_bill_number,
 				"shipping_bill_date": self.shipping_bill_date,
 				"port_of_loading" : self.port_of_loading,
@@ -281,4 +281,3 @@ def cancel_jv(self):
 			jv = frappe.get_doc("Journal Entry", self.meis_jv)
 			jv.cancel()
 			self.db_set('meis_jv','')
-

@@ -2,7 +2,7 @@
 cur_frm.add_fetch('advance_authorisation_license', 'approved_qty', 'license_qty');
 cur_frm.add_fetch('advance_authorisation_license', 'remaining_export_qty', 'license_remaining_qty');
 cur_frm.add_fetch('advance_authorisation_license', 'approved_amount', 'license_amount');
-cur_frm.add_fetch('advance_authorisation_license', 'remaining_export_amount', 'license_remaining_amount');
+cur_frm.add_fetch('advance_authorisation_license', 'remaining_license_amount', 'license_remaining_amount');
 
 // Address Filter
 cur_frm.set_query("notify_party", function () {

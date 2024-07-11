@@ -175,7 +175,7 @@ doc_events = {
         "Purchase Receipt",
         "Packing Slip",
     ): {
-        "before_naming": "exim.api.docs_before_naming",
+        # "before_naming": "exim.api.docs_before_naming",
     },
     "Rodtep Claim": {
         "on_submit": "exim.exim.doctype.rodtep_claim.rodtep_claim.create_jv_on_submit"
