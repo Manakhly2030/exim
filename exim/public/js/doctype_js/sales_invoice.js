@@ -416,7 +416,13 @@ frappe.ui.form.on("Sales Invoice Item", {
 
         }
     },
+    advance_authorisation_license : function(frm, cdt, cdn){
+        let d = locals[cdt][cdn];
+        if (d.advance_authorisation_license != ""){
+            frappe.model.set_value(cdt, cdn, "duty_drawback_rate", 0);
+        }
 
+    }
     // fob_value: function (frm, cdt, cdn) {
     //     frm.events.caclulate_total(frm);
     //     frm.events.duty_calculation(frm);
