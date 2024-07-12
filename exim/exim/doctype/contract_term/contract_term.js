@@ -4,8 +4,8 @@ cur_frm.add_fetch("sales_order", "port_of_discharge", "port_of_discharge");
 cur_frm.add_fetch("sales_order", "grand_total", "contract_amount");
 cur_frm.add_fetch("sales_order", "transaction_date", "contract_date");
 
-this.frm.add_fetch("sales_order", "grand_total", "grand_total");
-this.frm.add_fetch("sales_order", "net_total", "net_total");
+cur_frm.add_fetch("sales_order", "grand_total", "grand_total");
+cur_frm.add_fetch("sales_order", "net_total", "net_total");
 
 cur_frm.fields_dict.lc_opening_bank.get_query = function(doc) {
 	return {
