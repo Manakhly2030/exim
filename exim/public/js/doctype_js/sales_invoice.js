@@ -135,7 +135,7 @@ frappe.ui.form.on("Sales Invoice", {
             
             d.total_tare_weight = d.tare_wt * d.no_of_packages;
             let pallet = d.pallet_weight * d.total_pallets;
-            d.gross_wt = d.total_tare_weight + d.qty + pallet;
+            d.gross_wt = d.total_tare_weight + (d.qty * (flt(d.weight_per_unit) || 1)) + pallet;
             
             if ((frm.doc.gst_category == "Overseas") && (!frm.doc.manually_enter_fob_value)) {
                 if (['CIF', 'CFR', 'CNF', 'CPT'].indexOf(cur_frm.doc.shipping_terms) != -1){

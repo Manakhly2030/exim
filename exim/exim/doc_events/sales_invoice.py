@@ -58,7 +58,7 @@ def calculate_total(self):
 		row.total_tare_weight = flt(row.tare_wt * row.no_of_packages)
 		
 		pallet = flt(row.pallet_weight) * flt(row.total_pallets)
-		row.gross_wt = flt(row.total_tare_weight) + flt(row.qty) + flt(pallet)
+		row.gross_wt = flt(row.total_tare_weight) + (flt(row.qty) * (flt(row.weight_per_unit) or 1)) + flt(pallet)
 		
 		if not self.manually_enter_fob_value and self.gst_category == "Overseas":
 			if self.shipping_terms in ["CIF", "CFR", "CNF", "CPT"]:

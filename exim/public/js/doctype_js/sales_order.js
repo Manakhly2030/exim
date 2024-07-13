@@ -94,11 +94,8 @@ frappe.ui.form.on("Sales Order", {
 
         frm.doc.items.forEach(function (d) {
             total_qty += flt(d.qty);
+            d.gross_wt = flt(d.tare_wt) + (d.qty * (flt(d.weight_per_unit) || 1));
             total_gr_wt += flt(d.gross_wt);
-            // if (d.total_weight != 0) {
-            //     d.gross_wt = d.total_weight;
-            // }
-            // total_packages += flt(d.no_of_packages);
         });
 
         frm.set_value("total_qty", total_qty);
