@@ -44,8 +44,8 @@ class AdvanceAuthorisationLicense(Document):
 		self.remaining_export_qty = remaining_exp_qty
 
 		remaining_exp_amount = flt(self.total_license_amount) - flt(self.total_export_amount)
-		# if remaining_exp_amount < 0:
-		# 	frappe.msgprint(_("{0} amount over exported for item {1}.".format(abs(remaining_exp_amount), self.export_item)))
+		if remaining_exp_amount < 0:
+			frappe.msgprint(_("{0} amount over exported for item {1}.".format(abs(remaining_exp_amount), self.export_item)))
 
 		self.remaining_export_amount = remaining_exp_amount
 
