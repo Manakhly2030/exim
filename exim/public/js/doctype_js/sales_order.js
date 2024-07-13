@@ -51,12 +51,12 @@ frappe.ui.form.on("Sales Order", {
     refresh: function (frm) {
         if (!in_list(["Closed", "Completed"], frm.doc.status)) {
             if (frm.doc.docstatus == 1) {
-                frm.add_custom_button(__("LC"), function () {
+                frm.add_custom_button(__("Contract Term"), function () {
                     frappe.model.open_mapped_doc({
                         method: "exim.api.make_lc",
                         frm: cur_frm
                     })
-                }, __("Make"))
+                }, __("Create"))
             }
 
         }
@@ -95,6 +95,9 @@ frappe.ui.form.on("Sales Order", {
         frm.doc.items.forEach(function (d) {
             total_qty += flt(d.qty);
             total_gr_wt += flt(d.gross_wt);
+            // if (d.total_weight != 0) {
+            //     d.gross_wt = d.total_weight;
+            // }
             // total_packages += flt(d.no_of_packages);
         });
 
