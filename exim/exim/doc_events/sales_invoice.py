@@ -145,7 +145,7 @@ def export_lic(self):
 				"item_name": row.item_name,
 				"quantity": row.qty,
 				"uom": row.uom,
-				"fob_value" : flt(row.fob_value),
+				"fob_value" : flt(row.fob_value) / self.exchange_rate,
 				"currency" : self.currency,	
 				"shipping_bill_no": self.shipping_bill_number,
 				"shipping_bill_date": self.shipping_bill_date,

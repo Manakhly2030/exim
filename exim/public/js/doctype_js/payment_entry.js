@@ -125,11 +125,12 @@ frappe.ui.form.on("Payment Entry", {
 		}
 	},
 	cal_average_forward_rate: function(frm){
-		let total_forward_rate = 0;
+		let total_forward_amount = 0;
 		$.each(frm.doc.forwards, function(index, row){
-			total_forward_rate += flt(row.forward_rate);
+			total_forward_amount += flt(row.amount_utilized)
+			total_forward_inr_amount += (flt(row.forward_rate)*flt(row.amount_utilized));
 		});
-		frm.set_value("average_forward_rate", flt(total_forward_rate / (frm.doc.forwards.length || 1)));
+		frm.set_value("average_forward_rate", flt(total_forward_inr_amount / (total_forward_amount|| 1)));
 	},
 	cal_total_amount_utilized: function(frm){
 		let total_amount_utilized = 0;
