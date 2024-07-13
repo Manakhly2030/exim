@@ -447,7 +447,7 @@ def fwd_uti(self):
 					"date": self.posting_date,
 					"party_type": self.party_type,
 					"party": self.party,
-					"paid_amount" : self.paid_amount,
+					"paid_amount" : row.amount_utilized,
 					"voucher_type": "Payment Entry",
 					"voucher_no" : self.name,
 				})
