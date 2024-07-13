@@ -26,7 +26,7 @@
   "contract_amount",
   "percentage_credit_amount_tolerance",
   "partial_shipment",
-  "transshipment",
+  "trans_shipment",
   "description_of_goods",
   "column_break_23",
   "date_of_issue",
@@ -123,7 +123,6 @@
    "fieldname": "lc_bank_address",
    "fieldtype": "Data",
    "label": "LC Bank Address",
-   "options": "lc_opening_bank.branch_address",
    "read_only": 1
   },
   {
@@ -132,17 +131,17 @@
    "label": "Documentary Credit Number"
   },
   {
+   "fetch_from": "sales_order.customer_name",
    "fieldname": "applicant",
    "fieldtype": "Data",
    "label": "Applicant",
-   "options": "sales_order.customer_name",
    "read_only": 1
   },
   {
+   "fetch_from": "sales_order.company",
    "fieldname": "beneficiary",
    "fieldtype": "Data",
    "label": "Beneficiary",
-   "options": "sales_order.company",
    "read_only": 1
   },
   {
@@ -164,16 +163,11 @@
    "precision": "2"
   },
   {
+   "default": "0",
+   "fetch_from": "sales_order.partial_shipment",
    "fieldname": "partial_shipment",
-   "fieldtype": "Select",
-   "label": "Partial Shipment",
-   "options": "\nPermitted\nNot Permitted"
-  },
-  {
-   "fieldname": "transshipment",
-   "fieldtype": "Select",
-   "label": "Transshipment",
-   "options": "\nPermitted\nNot Permitted"
+   "fieldtype": "Check",
+   "label": "Partial Shipment"
   },
   {
    "fieldname": "description_of_goods",
@@ -296,10 +290,17 @@
    "fieldtype": "Currency",
    "label": "Amount Allowed From",
    "options": "currency"
+  },
+  {
+   "default": "0",
+   "fetch_from": "sales_order.trans_shipment",
+   "fieldname": "trans_shipment",
+   "fieldtype": "Check",
+   "label": "Trans Shipment"
   }
  ],
  "links": [],
- "modified": "2024-07-12 17:41:58.566954",
+ "modified": "2024-07-13 11:45:30.759124",
  "modified_by": "Administrator",
  "module": "Exim",
  "name": "Contract Term",
