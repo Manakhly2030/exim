@@ -43,7 +43,8 @@
   {
    "fieldname": "start_date",
    "fieldtype": "Date",
-   "label": "Start Date"
+   "label": "Start Date",
+   "reqd": 1
   },
   {
    "fieldname": "get_rodtep_entries",
@@ -63,7 +64,8 @@
   {
    "fieldname": "end_date",
    "fieldtype": "Date",
-   "label": "End Date"
+   "label": "End Date",
+   "reqd": 1
   },
   {
    "fieldname": "rodtep_entries_details_section",
@@ -120,7 +122,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-04-28 07:05:06.379011",
+ "modified": "2024-07-15 16:49:51.950767",
  "modified_by": "Administrator",
  "module": "Exim",
  "name": "Rodtep Claim",
