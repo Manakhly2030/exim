@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "autoname": "naming_series:",
  "creation": "2018-09-26 13:47:54.644036",
  "doctype": "DocType",
@@ -43,7 +44,9 @@
   "section_break_32",
   "document",
   "document_checks",
-  "contract_term_check"
+  "contract_term_check",
+  "amount_allowed_to",
+  "amount_allowed_from"
  ],
  "fields": [
   {
@@ -53,6 +56,7 @@
    "options": "Sales Order"
   },
   {
+   "fetch_from": "sales_order.transaction_date",
    "fieldname": "contract_date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -143,12 +147,14 @@
    "read_only": 1
   },
   {
+   "fetch_from": "sales_order.currency",
    "fieldname": "currency",
    "fieldtype": "Link",
    "label": "Currency",
    "options": "Currency"
   },
   {
+   "fetch_from": "sales_order.grand_total",
    "fieldname": "contract_amount",
    "fieldtype": "Currency",
    "label": "Contract Amount",
@@ -210,12 +216,14 @@
    "options": "\nSight\n30 Days\n45 Days\n60 Days\n90 Days\n120 Days"
   },
   {
+   "fetch_from": "sales_order.port_of_loading",
    "fieldname": "port_of_loading",
    "fieldtype": "Link",
    "label": "Port of Loading",
    "options": "Port Details"
   },
   {
+   "fetch_from": "sales_order.port_of_discharge",
    "fieldname": "port_of_discharge",
    "fieldtype": "Link",
    "label": "Port of Discharge",
@@ -279,12 +287,28 @@
    "fieldtype": "Select",
    "label": "Naming Series",
    "options": "CT-"
+  },
+  {
+   "depends_on": "eval: doc.terms_based_on == \"Letter of Credit\"",
+   "fieldname": "amount_allowed_to",
+   "fieldtype": "Currency",
+   "label": "Amount Allowed To",
+   "options": "currency"
+  },
+  {
+   "depends_on": "eval: doc.terms_based_on == \"Letter of Credit\"",
+   "fieldname": "amount_allowed_from",
+   "fieldtype": "Currency",
+   "label": "Amount Allowed From",
+   "options": "currency"
   }
  ],
- "modified": "2021-07-01 16:37:54.032041",
+ "links": [],
+ "modified": "2024-07-17 14:17:46.954358",
  "modified_by": "Administrator",
  "module": "Exim",
  "name": "Contract Term",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -338,5 +362,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

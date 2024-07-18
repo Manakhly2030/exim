@@ -1,8 +1,8 @@
 //EXIM
-cur_frm.add_fetch('advance_authorisation_license', 'approved_qty', 'license_qty');
-cur_frm.add_fetch('advance_authorisation_license', 'remaining_export_qty', 'license_remaining_qty');
-cur_frm.add_fetch('advance_authorisation_license', 'approved_amount', 'license_amount');
-cur_frm.add_fetch('advance_authorisation_license', 'remaining_export_amount', 'license_remaining_amount');
+// cur_frm.add_fetch('advance_authorisation_license', 'approved_qty', 'license_qty');
+// cur_frm.add_fetch('advance_authorisation_license', 'remaining_export_qty', 'license_remaining_qty');
+// cur_frm.add_fetch('advance_authorisation_license', 'approved_amount', 'license_amount');
+// cur_frm.add_fetch('advance_authorisation_license', 'remaining_export_amount', 'license_remaining_amount');
 
 // Address Filter
 cur_frm.set_query("notify_party", function () {
@@ -362,12 +362,12 @@ frappe.ui.form.on("Sales Invoice Item", {
             () => frm.events.run_all_calculation(frm),
         ]);
     },
-    rate: function (frm, cdt, cdn) {
-        frappe.run_serially([
-            () => frappe.timeout(1),
-            () => frm.events.run_all_calculation(frm),
-        ]);
-    },
+    // rate: function (frm, cdt, cdn) {
+    //     frappe.run_serially([
+    //         () => frappe.timeout(1),
+    //         () => frm.events.run_all_calculation(frm),
+    //     ]);
+    // },
     discount_amount: function (frm, cdt, cdn) {
         frappe.run_serially([
             () => frappe.timeout(1),

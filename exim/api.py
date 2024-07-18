@@ -13,29 +13,29 @@ def si_validate(self, method):
 	if self._action == 'submit':
 		validate_document_checks(self)
 
-@frappe.whitelist()
-def si_on_submit(self, method):
-	export_lic(self)
-	create_jv(self)
-	create_brc(self)
+# @frappe.whitelist()
+# def si_on_submit(self, method):
+# 	export_lic(self)
+# 	create_jv(self)
+# 	create_brc(self)
 
-@frappe.whitelist()
-def si_on_cancel(self, method):
-	export_lic_cancel(self)
-	cancel_jv(self, method)
+# @frappe.whitelist()
+# def si_on_cancel(self, method):
+# 	export_lic_cancel(self)
+# 	cancel_jv(self, method)
 	
-@frappe.whitelist()
-def si_before_save(self,method):
-	duty_calculation(self)
-	meis_calculation(self)
+# @frappe.whitelist()
+# def si_before_save(self,method):
+# 	duty_calculation(self)
+# 	meis_calculation(self)
 	
-@frappe.whitelist()
-def pi_on_submit(self, method):
-	import_lic(self)
+# @frappe.whitelist()
+# def pi_on_submit(self, method):
+# 	import_lic(self)
 	
-@frappe.whitelist()
-def pi_on_cancel(self, method):
-	import_lic_cancel(self)
+# @frappe.whitelist()
+# def pi_on_cancel(self, method):
+# 	import_lic_cancel(self)
 
 def create_jv(self):
 	if frappe.db.get_value('Address', self.customer_address, 'country') != "India":

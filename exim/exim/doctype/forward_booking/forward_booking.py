@@ -168,7 +168,6 @@ class ForwardBooking(Document):
 	def create_row_jv(self, row):
 		jv = frappe.new_doc("Journal Entry")
 		jv.voucher_type = "Journal Entry"
-		jv.naming_series = "JV-.fiscal.-"
 		jv.posting_date = self.maturity_to
 		
 		if not self.company:

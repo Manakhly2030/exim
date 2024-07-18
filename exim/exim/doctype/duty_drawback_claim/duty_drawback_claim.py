@@ -127,4 +127,3 @@ def create_jv_on_submit(self,method):
 					frappe.msgprint("Journal Entry Created Successfully {}".format(frappe.bold(meis_jv.name)))
 			except Exception as e:
 				frappe.throw(str(e))
-				

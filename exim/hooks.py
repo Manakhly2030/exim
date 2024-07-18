@@ -34,10 +34,10 @@ app_version = "3.1.0"
 
 doctype_js = {
     "Sales Order": "public/js/doctype_js/sales_order.js",
-    "Sales Invoice": "public/js/doctype_js/sales_invoice.js",
+     "Sales Invoice": "public/js/doctype_js/sales_invoice.js",
     "Delivery Note": "public/js/doctype_js/delivery_note.js",
     "Purchase Receipt": "public/js/doctype_js/purchase_receipt.js",
-    "Purchase Invoice": "public/js/doctype_js/purchase_invoice.js",
+    "Purchase Invoice": "public/js/doctype_js   /purchase_invoice.js",
     "Purchase Order": "public/js/doctype_js/purchase_order.js",
     "Lead": "public/js/doctype_js/lead.js",
     "Payment Entry": "public/js/doctype_js/payment_entry.js",
@@ -126,7 +126,7 @@ doctype_js = {
 # }
 
 # payment term override
-from exim.api import get_due_date
+from exim.exim.monkey_patch.accounts_controller import get_due_date
 from erpnext.controllers import accounts_controller
 
 accounts_controller.get_due_date = get_due_date
@@ -144,14 +144,6 @@ fixtures = [
         "dt": "Custom Field",
         "filters": [
             ["module", "in", ["Exim"]],
-            [
-                "dt",
-                "in",
-                [
-                    "Sales Invoice",
-                    "Company",
-                ],
-            ],
         ],
     },
     # {"dt": "Property Setter", "filters": [["module", "in", ["Exim"]]]},
@@ -169,8 +161,8 @@ doc_events = {
         "on_cancel": "exim.exim.doc_events.sales_invoice.on_cancel",
     },
     "Purchase Invoice": {
-        "on_submit": "exim.api.pi_on_submit",
-        "on_cancel": "exim.api.pi_on_cancel",
+        "on_submit": "exim.exim.doc_events.purchase_invoice.pi_on_submit",
+        "on_cancel": "exim.exim.doc_events.purchase_invoice.pi_on_cancel",
     },
     (
         "Purchase Invoice",
