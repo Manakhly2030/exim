@@ -144,17 +144,9 @@ fixtures = [
         "dt": "Custom Field",
         "filters": [
             ["module", "in", ["Exim"]],
-            [
-                "dt",
-                "in",
-                [
-                    "Sales Invoice",
-                    "Company",
-                ],
-            ],
         ],
     },
-    # {"dt": "Property Setter", "filters": [["module", "in", ["Exim"]]]},
+    {"dt": "Property Setter", "filters": [["module", "in", ["Exim"]]]},
     # {"dt": "Field Sequence", "filters": [["module", "in", ["Exim"]]]},
 ]
 # override_whitelisted_methods = {
