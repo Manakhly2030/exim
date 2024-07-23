@@ -194,11 +194,17 @@ def export_lic(self):
 def create_jv_with_gst(self):
     if not (self.get("is_export_with_gst") and self.get("taxes")):
         return
-
+    
+    if not hasattr(self, "branch"):
+        self.branch = None
+    
     taxes = self.get("taxes")[0]
     company_gst_payable_account = frappe.db.get_value(
         "Company", {"company_name": self.company}, "igst_export_refund_receivable"
     )
+    if not company_gst_payable_account:
+        frappe.throw(_(f"Set IGST Export Refund Receivable Account for {self.company}"))
+        return
     currency_precision = frappe.get_precision("Journal Entry Account", "debit_in_account_currency")
     jv = frappe.get_doc(
         {
