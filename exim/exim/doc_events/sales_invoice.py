@@ -166,6 +166,8 @@ def create_jv_with_gst(self):
         "Company", {"company_name": self.company}, "igst_export_refund_receivable"
     )
     currency_precision = frappe.get_precision("Journal Entry Account", "debit_in_account_currency")
+    if not hasattr(self, "branch"):
+        return 
     jv = frappe.get_doc(
         {
             "doctype": "Journal Entry",
@@ -181,15 +183,15 @@ def create_jv_with_gst(self):
                 {
                     "account": self.debit_to,
                     "exchange_rate": flt(self.conversion_rate),
-                    "debit_in_account_currency": flt(taxes.tax_amount,currency_precision),
-                    "credit_in_account_currency": 0,
+                    "debit_in_account_currency": 0,
+                    "credit_in_account_currency": flt(taxes.tax_amount,currency_precision),
                     "party_type": "Customer",
                     "party": self.customer,
                 },
                 {
                     "account": company_gst_payable_account,
-                    "debit_in_account_currency": 0,
-                    "credit_in_account_currency": flt(taxes.tax_amount,currency_precision) * self.conversion_rate,
+                    "debit_in_account_currency": flt(taxes.tax_amount,currency_precision) * self.conversion_rate,
+                    "credit_in_account_currency": 0,
                     "exchange_rate": 1,
                 },
             ],
