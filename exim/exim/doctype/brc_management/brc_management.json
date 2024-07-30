@@ -9,12 +9,18 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
+  "brc_number",
+  "brc_date",
+  "invoice_no",
+  "payment_receipt_date",
   "status",
   "amended_from",
-  "invoice_no",
   "currency",
   "column_break_3",
   "customer",
+  "irm_number",
+  "irm_date",
+  "rodtap_script_number",
   "base_rounded_total",
   "shipping_bill_details_section",
   "shipping_bill_details",
@@ -25,7 +31,8 @@
   "total_payment_receipt",
   "total_bank_charges",
   "column_break_15",
-  "total_brc_amount"
+  "total_brc_amount",
+  "remark"
  ],
  "fields": [
   {
@@ -156,15 +163,51 @@
    "label": "Currency",
    "options": "Currency",
    "read_only": 1
+  },
+  {
+   "fieldname": "brc_date",
+   "fieldtype": "Date",
+   "label": "BRC Date"
+  },
+  {
+   "fieldname": "irm_number",
+   "fieldtype": "Data",
+   "label": "IRM Number"
+  },
+  {
+   "fieldname": "irm_date",
+   "fieldtype": "Date",
+   "label": "IRM Date"
+  },
+  {
+   "fieldname": "rodtap_script_number",
+   "fieldtype": "Data",
+   "label": "Rodtap Script Number"
+  },
+  {
+   "fieldname": "payment_receipt_date",
+   "fieldtype": "Date",
+   "label": "Payment Receipt Date"
+  },
+  {
+   "fieldname": "brc_number",
+   "fieldtype": "Data",
+   "label": "BRC Number"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "Remark"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-08-12 10:24:25.294148",
+ "modified": "2024-07-30 10:35:01.771351",
  "modified_by": "Administrator",
  "module": "Exim",
  "name": "BRC Management",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -194,5 +237,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }
