@@ -443,3 +443,64 @@ frappe.ui.form.on('Notify Party Address', {
         }
     }
 })
+
+erpnext.accounts.SalesInvoiceController = class SalesInvoiceController extends erpnext.accounts.SalesInvoiceController{
+    payment_terms_template() {
+		var me = this;
+        const doc = me.frm.doc;
+		if(doc.payment_terms_template && doc.doctype !== 'Delivery Note') {
+            if (frappe.meta.get_docfield("Sales Invoice", "bl_date") || frappe.meta.get_docfield("Sales Invoice", "shipping_bill_date")){
+                var posting_date = doc.bl_date || doc.shipping_bill_date || doc.posting_date || doc.transaction_date;
+            }
+            else{
+                var posting_date =  doc.posting_date || doc.transaction_date;
+            }
+
+			frappe.call({
+				method: "erpnext.controllers.accounts_controller.get_payment_terms",
+				args: {
+					terms_template: doc.payment_terms_template,
+					posting_date: posting_date,
+					grand_total: doc.rounded_total || doc.grand_total,
+                    base_grand_total: doc.base_rounded_total || doc.base_grand_total,
+					bill_date: doc.bill_date
+				},
+				callback: function(r) {
+					if(r.message && !r.exc) {
+						me.frm.set_value("payment_schedule", r.message);
+					}
+				}
+			})
+		}
+    }
+    bl_date() {
+		var me = this;
+        const doc = me.frm.doc;
+		if(doc.payment_terms_template && doc.doctype !== 'Delivery Note') {
+            if (frappe.meta.get_docfield("Sales Invoice", "bl_date") || frappe.meta.get_docfield("Sales Invoice", "shipping_bill_date")){
+                var posting_date = doc.bl_date || doc.shipping_bill_date || doc.posting_date || doc.transaction_date;
+            }
+            else{
+                var posting_date =  doc.posting_date || doc.transaction_date;
+            }
+
+			frappe.call({
+				method: "erpnext.controllers.accounts_controller.get_payment_terms",
+				args: {
+					terms_template: doc.payment_terms_template,
+					posting_date: posting_date,
+					grand_total: doc.rounded_total || doc.grand_total,
+                    base_grand_total: doc.base_rounded_total || doc.base_grand_total,
+					bill_date: doc.bill_date
+				},
+				callback: function(r) {
+					if(r.message && !r.exc) {
+						me.frm.set_value("payment_schedule", r.message);
+					}
+				}
+			})
+		}
+    }
+}
+
+extend_cscript(cur_frm.cscript, new erpnext.accounts.SalesInvoiceController({ frm: cur_frm }));

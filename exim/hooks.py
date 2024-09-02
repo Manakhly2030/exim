@@ -140,13 +140,7 @@ accounts_controller.get_due_date = get_due_date
 # fixtures = ["Custom Field"]
 
 fixtures = [
-    {
-        "dt": "Custom Field",
-        "filters": [
-            ["module", "in", ["Exim"]],
-        ],
-    },
-    {"dt": "Property Setter", "filters": [["module", "in", ["Exim"]]]},
+    {"dt": "Property Setter", "filters": [["name", "in", ["Sales Invoice-payment_schedule-allow_on_submit","Sales Invoice-payment_terms_template-allow_on_submit","Purchase Invoice-payment_terms_template-allow_on_submit","Purchase Invoice-payment_schedule-allow_on_submit"]]]},
     # {"dt": "Field Sequence", "filters": [["module", "in", ["Exim"]]]},
 ]
 # override_whitelisted_methods = {
