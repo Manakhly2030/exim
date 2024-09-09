@@ -281,4 +281,3 @@ def cancel_jv(self):
 			jv = frappe.get_doc("Journal Entry", self.meis_jv)
 			jv.cancel()
 			self.db_set('meis_jv','')
-

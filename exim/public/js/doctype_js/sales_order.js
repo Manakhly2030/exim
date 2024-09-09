@@ -1,6 +1,6 @@
-this.frm.cscript.onload = function (frm) {
+cur_frm.cscript.onload = function (frm) {
     // Billing Address Filter
-    this.frm.set_query("customer_address", function () {
+    cur_frm.set_query("customer_address", function () {
         return {
             query: "frappe.contacts.doctype.address.address.address_query",
             filters: { link_doctype: "Customer", link_name: cur_frm.doc.customer }
@@ -8,7 +8,7 @@ this.frm.cscript.onload = function (frm) {
     });
 
     // Shipping Address Filter
-    this.frm.set_query("shipping_address_name", function () {
+    cur_frm.set_query("shipping_address_name", function () {
         return {
             query: "frappe.contacts.doctype.address.address.address_query",
             filters: { link_doctype: "Customer", link_name: cur_frm.doc.customer }
@@ -16,7 +16,7 @@ this.frm.cscript.onload = function (frm) {
     });
 
     // Supplier Contact Filter
-    this.frm.set_query("contact_person", function () {
+    cur_frm.set_query("contact_person", function () {
         return {
             query: "frappe.contacts.doctype.contact.contact.contact_query",
             filters: { link_doctype: "Customer", link_name: cur_frm.doc.customer }

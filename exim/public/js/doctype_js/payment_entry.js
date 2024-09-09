@@ -1,14 +1,14 @@
 
-this.frm.add_fetch('forward_contract', 'booking_rate', 'forward_rate');
-this.frm.add_fetch('forward_contract', 'amount', 'amount');
-this.frm.add_fetch('forward_contract', 'maturity_from', 'maturity_from');
-this.frm.add_fetch('forward_contract', 'maturity_to', 'maturity_to');
-this.frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_outstanding');
-this.frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_utilized');
+cur_frm.add_fetch('forward_contract', 'booking_rate', 'forward_rate');
+cur_frm.add_fetch('forward_contract', 'amount', 'amount');
+cur_frm.add_fetch('forward_contract', 'maturity_from', 'maturity_from');
+cur_frm.add_fetch('forward_contract', 'maturity_to', 'maturity_to');
+cur_frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_outstanding');
+cur_frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_utilized');
 
-this.frm.cscript.onload = function(frm) {
-	if (this.frm.doc.paid_to_account_currency == 'INR'){
-		this.frm.set_query("forward_contract","forwards", function() {
+cur_frm.cscript.onload = function(frm) {
+	if (cur_frm.doc.paid_to_account_currency == 'INR'){
+		cur_frm.set_query("forward_contract","forwards", function() {
 			return {
 				"filters": {
 					"hedge": "Export",
@@ -21,7 +21,7 @@ this.frm.cscript.onload = function(frm) {
 		});
 	}
 	else {
-		this.frm.set_query("forward_contract","forwards", function() {
+		cur_frm.set_query("forward_contract","forwards", function() {
 			return {
 				"filters": {
 					"hedge": "Import",
