@@ -2,7 +2,7 @@
 cur_frm.add_fetch('advance_authorisation_license', 'approved_qty', 'license_qty');
 cur_frm.add_fetch('advance_authorisation_license', 'remaining_export_qty', 'license_remaining_qty');
 cur_frm.add_fetch('advance_authorisation_license', 'approved_amount', 'license_amount');
-cur_frm.add_fetch('advance_authorisation_license', 'remaining_export_amount', 'license_remaining_amount');
+cur_frm.add_fetch('advance_authorisation_license', 'remaining_license_amount', 'license_remaining_amount');
 
 // Address Filter
 cur_frm.set_query("notify_party", function () {
@@ -135,7 +135,7 @@ frappe.ui.form.on("Sales Invoice", {
             
             d.total_tare_weight = d.tare_wt * d.no_of_packages;
             let pallet = d.pallet_weight * d.total_pallets;
-            d.gross_wt = d.total_tare_weight + d.qty + pallet;
+            d.gross_wt = d.total_tare_weight + (d.qty * (flt(d.weight_per_unit) || 1)) + pallet;
             
             if ((frm.doc.gst_category == "Overseas") && (!frm.doc.manually_enter_fob_value)) {
                 if (['CIF', 'CFR', 'CNF', 'CPT'].indexOf(cur_frm.doc.shipping_terms) != -1){
@@ -416,7 +416,13 @@ frappe.ui.form.on("Sales Invoice Item", {
 
         }
     },
+    advance_authorisation_license : function(frm, cdt, cdn){
+        let d = locals[cdt][cdn];
+        if (d.advance_authorisation_license != ""){
+            frappe.model.set_value(cdt, cdn, "duty_drawback_rate", 0);
+        }
 
+    }
     // fob_value: function (frm, cdt, cdn) {
     //     frm.events.caclulate_total(frm);
     //     frm.events.duty_calculation(frm);

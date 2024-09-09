@@ -31,6 +31,7 @@ class AdvanceAuthorisationLicense(Document):
 			self.remaining_license_amount = flt(self.approved_amount) - self.total_import_amount	
 		else:
 			frappe.throw(_("AdvanceAuthorisationLicense {} total approved amount is less than utilization".format(self.name)))
+		
 		self.total_export_qty = sum([flt(d.quantity) for d in self.get('exports')])
 		self.total_export_amount = sum([flt(d.fob_value) for d in self.get('exports')])
 		
@@ -43,11 +44,11 @@ class AdvanceAuthorisationLicense(Document):
 	
 		self.remaining_export_qty = remaining_exp_qty
 
-		remaining_exp_amount = flt(self.total_license_amount) - flt(self.total_export_amount)
-		# if remaining_exp_amount < 0:
-		# 	frappe.msgprint(_("{0} amount over exported for item {1}.".format(abs(remaining_exp_amount), self.export_item)))
+		self.remaining_export_amount = flt(self.total_license_amount) - flt(self.total_export_amount)
+		
+		if self.remaining_export_amount < 0:
+			frappe.throw(_("{0} amount over exported for item {1}.".format(abs(self.remaining_export_amount), self.export_item)))
 
-		self.remaining_export_amount = remaining_exp_amount
 
 	def validate_import_ratio(self):
 		for row in self.get('item_import_ratio'):

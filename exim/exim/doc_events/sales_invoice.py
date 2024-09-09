@@ -18,6 +18,7 @@ def on_submit(self, method):
 	export_lic(self)
 	create_jv(self)
 	create_brc(self)
+	create_jv_with_gst(self)
 
 
 def on_cancel(self, method):
@@ -58,7 +59,7 @@ def calculate_total(self):
 		row.total_tare_weight = flt(row.tare_wt * row.no_of_packages)
 		
 		pallet = flt(row.pallet_weight) * flt(row.total_pallets)
-		row.gross_wt = flt(row.total_tare_weight) + flt(row.qty) + flt(pallet)
+		row.gross_wt = flt(row.total_tare_weight) + (flt(row.qty) * (flt(row.weight_per_unit) or 1)) + flt(pallet)
 		
 		if not self.manually_enter_fob_value and self.gst_category == "Overseas":
 			if self.shipping_terms in ["CIF", "CFR", "CNF", "CPT"]:
@@ -145,8 +146,8 @@ def export_lic(self):
 				"item_name": row.item_name,
 				"quantity": row.qty,
 				"uom": row.uom,
-				"fob_value" : flt(row.fob_value),
-				"currency" : self.currency,
+				"fob_value" : flt(row.fob_value) / self.conversion_rate,
+				"currency" : self.currency,	
 				"shipping_bill_no": self.shipping_bill_number,
 				"shipping_bill_date": self.shipping_bill_date,
 				"port_of_loading" : self.port_of_loading,
@@ -157,6 +158,54 @@ def export_lic(self):
 			aal.total_export_qty = sum([flt(d.quantity) for d in aal.exports])
 			aal.total_export_amount = sum([flt(d.fob_value) for d in aal.exports])
 			aal.save()
+
+def create_jv_with_gst(self):
+    if not (self.get("is_export_with_gst") and self.get("taxes")):
+        return
+
+    taxes = self.get("taxes")[0]
+    company_gst_payable_account = frappe.db.get_value(
+        "Company", {"company_name": self.company}, "igst_export_refund_receivable"
+    )
+    currency_precision = frappe.get_precision("Journal Entry Account", "debit_in_account_currency")
+    jv = frappe.get_doc(
+        {
+            "doctype": "Journal Entry",
+            "voucher_type": "Journal Entry",
+            "posting_date": self.posting_date,
+            "cheque_date": self.posting_date,
+            "multi_currency": 1,
+            "company": self.company,
+            "company_gstin": self.company_gstin,
+            "branch": self.branch,
+            "cheque_no": self.name,
+            "accounts": [
+                {
+                    "account": self.debit_to,
+                    "exchange_rate": flt(self.conversion_rate),
+                    "debit_in_account_currency": flt(taxes.tax_amount,currency_precision),
+                    "credit_in_account_currency": 0,
+                    "party_type": "Customer",
+                    "party": self.customer,
+                },
+                {
+                    "account": company_gst_payable_account,
+                    "debit_in_account_currency": 0,
+                    "credit_in_account_currency": flt(taxes.tax_amount,currency_precision) * self.conversion_rate,
+                    "exchange_rate": 1,
+                },
+            ],
+        }
+    )
+    try:
+        jv.save(ignore_permissions=True)
+        jv.submit()
+    except Exception as e:
+        frappe.throw(str(e))
+    else:
+        meta = frappe.get_meta(self.doctype)
+        if meta.has_field("igst_refund_jv"):
+            self.db_set("igst_refund_jv", jv.name)
 
 
 def create_jv(self):

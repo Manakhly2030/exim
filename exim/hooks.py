@@ -140,9 +140,8 @@ accounts_controller.get_due_date = get_due_date
 # fixtures = ["Custom Field"]
 
 fixtures = [
-    {"dt": "Custom Field", "filters": [["module", "in", ["Exim"]], ["dt", "not in", ["Sales Invoice", "Sales Invoice Item", "Delivery Note", "Delivery Note Item", "Sales Order", "Sales Order Item"]]]},
-    # {"dt": "Property Setter", "filters": [["module", "in", ["Exim"]]]},
-    {"dt": "Field Sequence", "filters": [["module", "in", ["Exim"]]]},
+    {"dt": "Custom Field", "filters": [["module", "in", ["Exim"]]]},
+    {"dt": "Property Setter", "filters": [["module", "in", ["Exim"]]]},
 ]
 # override_whitelisted_methods = {
 # 	"frappe.utils.print_format.download_pdf": "exim.print_format.download_pdf",
@@ -175,7 +174,7 @@ doc_events = {
         "Purchase Receipt",
         "Packing Slip",
     ): {
-        "before_naming": "exim.api.docs_before_naming",
+        # "before_naming": "exim.api.docs_before_naming",
     },
     "Rodtep Claim": {
         "on_submit": "exim.exim.doctype.rodtep_claim.rodtep_claim.create_jv_on_submit"

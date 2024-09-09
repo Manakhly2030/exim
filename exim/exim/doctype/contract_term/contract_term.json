@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "autoname": "naming_series:",
  "creation": "2018-09-26 13:47:54.644036",
  "doctype": "DocType",
@@ -13,6 +14,9 @@
   "contract_status",
   "to_order",
   "column_break_6",
+  "customer_name",
+  "customer_address",
+  "address",
   "remarks",
   "section_break_12",
   "lc_no",
@@ -25,7 +29,7 @@
   "contract_amount",
   "percentage_credit_amount_tolerance",
   "partial_shipment",
-  "transshipment",
+  "trans_shipment",
   "description_of_goods",
   "column_break_23",
   "date_of_issue",
@@ -43,7 +47,9 @@
   "section_break_32",
   "document",
   "document_checks",
-  "contract_term_check"
+  "contract_term_check",
+  "amount_allowed_to",
+  "amount_allowed_from"
  ],
  "fields": [
   {
@@ -120,7 +126,6 @@
    "fieldname": "lc_bank_address",
    "fieldtype": "Data",
    "label": "LC Bank Address",
-   "options": "lc_opening_bank.branch_address",
    "read_only": 1
   },
   {
@@ -129,17 +134,17 @@
    "label": "Documentary Credit Number"
   },
   {
+   "fetch_from": "sales_order.customer_name",
    "fieldname": "applicant",
    "fieldtype": "Data",
    "label": "Applicant",
-   "options": "sales_order.customer_name",
    "read_only": 1
   },
   {
+   "fetch_from": "sales_order.company",
    "fieldname": "beneficiary",
    "fieldtype": "Data",
    "label": "Beneficiary",
-   "options": "sales_order.company",
    "read_only": 1
   },
   {
@@ -161,16 +166,11 @@
    "precision": "2"
   },
   {
+   "default": "0",
+   "fetch_from": "sales_order.partial_shipment",
    "fieldname": "partial_shipment",
-   "fieldtype": "Select",
-   "label": "Partial Shipment",
-   "options": "\nPermitted\nNot Permitted"
-  },
-  {
-   "fieldname": "transshipment",
-   "fieldtype": "Select",
-   "label": "Transshipment",
-   "options": "\nPermitted\nNot Permitted"
+   "fieldtype": "Check",
+   "label": "Partial Shipment"
   },
   {
    "fieldname": "description_of_goods",
@@ -279,12 +279,54 @@
    "fieldtype": "Select",
    "label": "Naming Series",
    "options": "CT-"
+  },
+  {
+   "depends_on": "eval: doc.terms_based_on == \"Letter of Credit\"",
+   "fieldname": "amount_allowed_to",
+   "fieldtype": "Currency",
+   "label": "Amount Allowed To",
+   "options": "currency"
+  },
+  {
+   "depends_on": "eval: doc.terms_based_on == \"Letter of Credit\"",
+   "fieldname": "amount_allowed_from",
+   "fieldtype": "Currency",
+   "label": "Amount Allowed From",
+   "options": "currency"
+  },
+  {
+   "default": "0",
+   "fetch_from": "sales_order.trans_shipment",
+   "fieldname": "trans_shipment",
+   "fieldtype": "Check",
+   "label": "Trans Shipment"
+  },
+  {
+   "fetch_from": "sales_order.customer",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "sales_order.customer_address",
+   "fieldname": "customer_address",
+   "fieldtype": "Data",
+   "label": "Customer Address"
+  },
+  {
+   "fetch_from": "sales_order.address_display",
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
   }
  ],
- "modified": "2021-07-01 16:37:54.032041",
+ "links": [],
+ "modified": "2024-07-13 12:55:29.149706",
  "modified_by": "Administrator",
  "module": "Exim",
  "name": "Contract Term",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -338,5 +380,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

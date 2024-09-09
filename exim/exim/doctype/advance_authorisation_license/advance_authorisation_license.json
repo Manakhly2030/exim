@@ -15,6 +15,7 @@
   "approved_amount",
   "total_license_amount",
   "currency",
+  "company",
   "column_break3",
   "date",
   "due_date",
@@ -48,6 +49,7 @@
   {
    "fieldname": "export_item",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Export Item",
    "options": "Item",
    "reqd": 1
@@ -69,13 +71,15 @@
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Approved Amount",
+   "options": "currency",
    "reqd": 1
   },
   {
    "default": "0",
    "fieldname": "total_license_amount",
    "fieldtype": "Currency",
-   "label": "Total License Amount"
+   "label": "Total License Amount",
+   "options": "currency"
   },
   {
    "fieldname": "currency",
@@ -91,6 +95,7 @@
    "default": "Today",
    "fieldname": "date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Date",
    "reqd": 1
   },
@@ -204,14 +209,21 @@
    "fieldtype": "Date",
    "label": "Due Date",
    "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
   }
  ],
  "icon": "fa fa-id-card-o",
  "links": [],
- "modified": "2022-06-30 09:55:21.292743",
+ "modified": "2024-07-13 12:55:49.959186",
  "modified_by": "Administrator",
  "module": "Exim",
  "name": "Advance Authorisation License",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -252,5 +264,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

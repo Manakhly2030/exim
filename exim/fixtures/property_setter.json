@@ -1,0 +1,18 @@
+[
+ {
+  "default_value": null,
+  "doc_type": "Payment Term",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "due_date_based_on",
+  "is_system_generated": 1,
+  "modified": "2024-07-13 11:24:00.920931",
+  "module": "Exim",
+  "name": "Payment Term-due_date_based_on-options",
+  "property": "options",
+  "property_type": "Text",
+  "row_name": null,
+  "value": "Day(s) after invoice date\nDay(s) after bl date\nDay(s) after the end of the invoice month\nMonth(s) after the end of the invoice month"
+ }
+]

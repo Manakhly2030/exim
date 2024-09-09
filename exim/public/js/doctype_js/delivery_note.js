@@ -38,7 +38,7 @@ frappe.ui.form.on("Delivery Note", {
             }
             
             d.total_tare_weight = d.tare_wt * d.no_of_packages;
-            d.gross_wt = d.total_tare_weight + d.qty;
+            d.gross_wt = d.total_tare_weight + (d.qty * (flt(d.weight_per_unit) || 1));
             
             if ((frm.doc.gst_category == "Overseas") && (!frm.doc.manually_enter_fob_value)) {
                 if (['CIF', 'CFR', 'CNF', 'CPT'].indexOf(cur_frm.doc.shipping_terms) != -1){

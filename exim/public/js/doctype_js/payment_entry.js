@@ -86,6 +86,8 @@ frappe.ui.form.on("Payment Entry", {
 				frappe.throw(__("Total Amount Utilized must be same as Paid Amount."))
 			}
 		}
+
+		frm.trigger("cal_average_forward_rate");
 	},
 
 	payment_type: function(frm){
@@ -125,15 +127,17 @@ frappe.ui.form.on("Payment Entry", {
 		}
 	},
 	cal_average_forward_rate: function(frm){
-		let total_forward_rate = 0;
-		$.each(frm.doc.forwards, function(index, row){
-			total_forward_rate += flt(row.forward_rate);
+		let total_forward_amount = 0;
+		let total_forward_inr_amount = 0;
+		frm.doc.forwards.forEach((row) => {
+			total_forward_amount += flt(row.amount_utilized);
+			total_forward_inr_amount += (flt(row.forward_rate)*flt(row.amount_utilized));
 		});
-		frm.set_value("average_forward_rate", flt(total_forward_rate / (frm.doc.forwards.length || 1)));
+		frm.set_value("average_forward_rate", flt(total_forward_inr_amount / (total_forward_amount|| 1)));
 	},
 	cal_total_amount_utilized: function(frm){
 		let total_amount_utilized = 0;
-		$.each(frm.doc.forwards, function(index, row){
+		frm.doc.forwards.forEach((row) => {
 			total_amount_utilized += flt(row.amount_utilized);
 		});
 		frm.set_value("total_amount_utilized", total_amount_utilized);
