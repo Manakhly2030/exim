@@ -25,15 +25,27 @@ cur_frm.set_query("shipping_address", function () {
 
 frappe.ui.form.on("Purchase Invoice", {
     setup: function (frm) {
-        frm.set_query("advance_authorisation_license", "items", function (doc, cdt, cdn) {
-            let d = locals[cdt][cdn];
-            return {
-                query: "exim.exim.doctype.advance_authorisation_license.advance_authorisation_license.license_query",
-                filters: {
-                    'item_code': d.item_code
-                }
-            }
-        });
+        frappe.db.get_single_value('Exim Settings', 'use_advance_authorization_license_based_on_cas_no_of_item')
+            .then(function(data) {
+                frm.set_query("advance_authorisation_license", "items", function (doc, cdt, cdn) {
+                    let d = locals[cdt][cdn];
+                    if (data) {
+                        return {
+                                query: "exim.exim.doctype.advance_authorisation_license.advance_authorisation_license.cas_number_details",
+                                filters: {
+                                    'cas_number': d.cas_number
+                                }
+                            };
+                    }
+                    else{
+                        return {
+                            query: "exim.exim.doctype.advance_authorisation_license.advance_authorisation_license.license_query",
+                                    filters: {
+                                        'item_code': d.item_code
+                                    }
+                        };
+                }});
+            });
     },
 
     before_submit: function (frm) {

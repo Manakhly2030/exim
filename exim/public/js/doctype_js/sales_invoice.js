@@ -11,7 +11,28 @@ cur_frm.set_query("notify_party", function () {
         filters: { link_doctype: "Customer", link_name: cur_frm.doc.customer }
     };
 });
-
+frappe.db.get_single_value('Exim Settings', 'use_advance_authorization_license_based_on_cas_no_of_item').then(function(data) {
+    if (data) {
+        cur_frm.fields_dict.items.grid.get_field("advance_authorisation_license").get_query = function (doc, cdt, cdn) {
+            let d = locals[cdt][cdn];
+           
+                return {
+                    filters: {
+                        "cas_number": d.cas_number
+                    }
+                };
+        };
+    } else {
+        cur_frm.fields_dict.items.grid.get_field("advance_authorisation_license").get_query = function (doc, cdt, cdn) {
+            let d = locals[cdt][cdn];
+            return {
+                filters: {
+                    "export_item": d.item_code
+                }
+            };
+        };
+    }
+});
 cur_frm.fields_dict.items.grid.get_field("advance_authorisation_license").get_query = function (doc, cdt, cdn) {
     let d = locals[cdt][cdn];
     return {

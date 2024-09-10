@@ -84,7 +84,21 @@ def license_query(doctype, txt, searchfield, start, page_len, filters):
 			'page_len': page_len,
 			'item_code': filters.get('item_code')
 		})
-
+@frappe.whitelist()
+def cas_number_details(doctype, txt, searchfield, start, page_len, filters):
+	return frappe.db.sql("""select distinct aal.name, ratio.total_import_qty, ratio.total_import_amount,aal.cas_number
+			from `tabAdvance Authorisation License` aal
+				LEFT JOIN `tabItem Import Ratio` ratio on (ratio.parent = aal.name)
+			where ratio.cas_number = %(cas_number)s
+		order by
+			if(locate(%(_txt)s, aal.name), locate(%(_txt)s, aal.name), 99999)
+		limit %(start)s, %(page_len)s """, {
+			'txt': "%%%s%%" % txt,
+			'_txt': txt.replace("%", ""),
+			'start': start,
+			'page_len': page_len,
+			'cas_number': filters.get('cas_number')
+		})
 @frappe.whitelist()
 def get_license_details(aal, item_code):
 	return frappe.db.sql("""select distinct aal.name, ratio.approved_qty, ratio.remaining_qty, 

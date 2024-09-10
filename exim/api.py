@@ -13,29 +13,29 @@ def si_validate(self, method):
 	if self._action == 'submit':
 		validate_document_checks(self)
 
-@frappe.whitelist()
-def si_on_submit(self, method):
-	export_lic(self)
-	create_jv(self)
-	create_brc(self)
+# @frappe.whitelist()
+# def si_on_submit(self, method):
+# 	export_lic(self)
+# 	create_jv(self)
+# 	create_brc(self)
 
-@frappe.whitelist()
-def si_on_cancel(self, method):
-	export_lic_cancel(self)
-	cancel_jv(self, method)
+# @frappe.whitelist()
+# def si_on_cancel(self, method):
+# 	export_lic_cancel(self)
+# 	cancel_jv(self, method)
 	
-@frappe.whitelist()
-def si_before_save(self,method):
-	duty_calculation(self)
-	meis_calculation(self)
+# @frappe.whitelist()
+# def si_before_save(self,method):
+# 	duty_calculation(self)
+# 	meis_calculation(self)
 	
-@frappe.whitelist()
-def pi_on_submit(self, method):
-	import_lic(self)
+# @frappe.whitelist()
+# def pi_on_submit(self, method):
+# 	import_lic(self)
 	
-@frappe.whitelist()
-def pi_on_cancel(self, method):
-	import_lic_cancel(self)
+# @frappe.whitelist()
+# def pi_on_cancel(self, method):
+# 	import_lic_cancel(self)
 
 def create_jv(self):
 	if frappe.db.get_value('Address', self.customer_address, 'country') != "India":
@@ -471,15 +471,15 @@ def fwd_uti_cancel(self):
 		doc.save()
 
 
-def get_due_date(term, posting_date=None, bill_date=None):
-	due_date = None
-	date = bill_date or posting_date
-	if term.due_date_based_on == "Day(s) after invoice date":
-		due_date = add_days(date, term.credit_days)
-	elif term.due_date_based_on == 'Day(s) after bl date':
-		due_date = add_days(date, term.credit_days)
-	elif term.due_date_based_on == "Day(s) after the end of the invoice month":
-		due_date = add_days(get_last_day(date), term.credit_days)
-	elif term.due_date_based_on == "Month(s) after the end of the invoice month":
-		due_date = add_months(get_last_day(date), term.credit_months)
-	return due_date
+# def get_due_date(term, posting_date=None, bill_date=None):
+# 	due_date = None
+# 	date = bill_date or posting_date
+# 	if term.due_date_based_on == "Day(s) after invoice date":
+# 		due_date = add_days(date, term.credit_days)
+# 	elif term.due_date_based_on == 'Day(s) after bl date':
+# 		due_date = add_days(date, term.credit_days)
+# 	elif term.due_date_based_on == "Day(s) after the end of the invoice month":
+# 		due_date = add_days(get_last_day(date), term.credit_days)
+# 	elif term.due_date_based_on == "Month(s) after the end of the invoice month":
+# 		due_date = add_months(get_last_day(date), term.credit_months)
+# 	return due_date

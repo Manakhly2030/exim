@@ -17,7 +17,7 @@ class PostShipment(Document):
 		self.calculate_repayments()
 		self.calculate_forward_utilization()
 		self.set_exchange_rate()
-		self.calculate_loan_amount()
+		self.calculate_loan_amount()	
 
 		if self._action == 'submit':
 			self.validate_fields()

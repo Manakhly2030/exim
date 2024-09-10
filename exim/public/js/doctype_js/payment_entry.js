@@ -7,7 +7,7 @@ cur_frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_outstanding'
 cur_frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_utilized');
 
 cur_frm.cscript.onload = function(frm) {
-	if (cur_frm.doc.paid_to_account_currency == 'INR'){
+	// if (cur_frm.doc.paid_to_account_currency == 'INR'){
 		cur_frm.set_query("forward_contract","forwards", function() {
 			return {
 				"filters": {
@@ -20,20 +20,20 @@ cur_frm.cscript.onload = function(frm) {
 			};
 		});
 	}
-	else {
-		cur_frm.set_query("forward_contract","forwards", function() {
-			return {
-				"filters": {
-					"hedge": "Import",
-					"status": "Open",
-					"docstatus": 1,
-					"amount_outstanding": ['>', '0'],
-					"currency": cur_frm.doc.paid_to_account_currency
-				}
-			};
-		});
-	}
-}
+	// else {
+	// 	cur_frm.set_query("forward_contract","forwards", function() {
+	// 		return {
+	// 			"filters": {
+	// 				"hedge": "Import",
+	// 				"status": "Open",
+	// 				"docstatus": 1,
+	// 				"amount_outstanding": ['>', '0'],
+	// 				"currency": cur_frm.doc.paid_to_account_currency
+	// 			}
+	// 		};
+	// 	});
+	// }
+// }
 
 frappe.ui.form.on("Payment Entry", {
     paid_to: function(frm){
