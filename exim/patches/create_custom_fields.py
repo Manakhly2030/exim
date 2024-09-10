@@ -2,7 +2,8 @@ from __future__ import unicode_literals
 import frappe
 
 def execute():
-    create_bank_field()
+    # create_bank_field()
+    pass
 
 def create_bank_field():
     if frappe.get_doc("Custom Field",{'fieldname':"bank_type",'dt':"Bank"}):

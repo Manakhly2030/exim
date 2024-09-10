@@ -3,23 +3,23 @@
 
 let set_currency = 0;
 
-this.frm.add_fetch('forward_contract', 'booking_rate', 'forward_rate');
-this.frm.add_fetch('forward_contract', 'amount', 'forward_amount');
-this.frm.add_fetch('forward_contract', 'maturity_from', 'maturity_from');
-this.frm.add_fetch('forward_contract', 'maturity_to', 'maturity_to');
-this.frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_outstanding');
-this.frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_utilized');
+cur_frm.add_fetch('forward_contract', 'booking_rate', 'forward_rate');
+cur_frm.add_fetch('forward_contract', 'amount', 'forward_amount');
+cur_frm.add_fetch('forward_contract', 'maturity_from', 'maturity_from');
+cur_frm.add_fetch('forward_contract', 'maturity_to', 'maturity_to');
+cur_frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_outstanding');
+cur_frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_utilized');
 
-this.frm.add_fetch('pre_shipment', 'loan_outstanding_amount', 'outstanding_amount');
-this.frm.add_fetch('pre_shipment', 'loan_outstanding_amount', 'repayment_amount');
-this.frm.add_fetch('pre_shipment', 'loan_outstanding_amount_inr', 'outstanding_amount_inr');
-this.frm.add_fetch('pre_shipment', 'loan_outstanding_amount_inr', 'repayment_amount_inr');
-this.frm.add_fetch('pre_shipment', 'source_exchange_rate', 'exchange_rate');
-this.frm.add_fetch('pre_shipment', 'credit_currency', 'currency');
-this.frm.add_fetch('pre_shipment', 'loan_account', 'loan_account');
+cur_frm.add_fetch('pre_shipment', 'loan_outstanding_amount', 'outstanding_amount');
+cur_frm.add_fetch('pre_shipment', 'loan_outstanding_amount', 'repayment_amount');
+cur_frm.add_fetch('pre_shipment', 'loan_outstanding_amount_inr', 'outstanding_amount_inr');
+cur_frm.add_fetch('pre_shipment', 'loan_outstanding_amount_inr', 'repayment_amount_inr');
+cur_frm.add_fetch('pre_shipment', 'source_exchange_rate', 'exchange_rate');
+cur_frm.add_fetch('pre_shipment', 'credit_currency', 'currency');
+cur_frm.add_fetch('pre_shipment', 'loan_account', 'loan_account');
 
 cur_frm.fields_dict.funding_bank.get_query = function(doc) {
-	return {
+	return {	
 		filters: {
 			"bank_type": "Indian Bank"
 		}

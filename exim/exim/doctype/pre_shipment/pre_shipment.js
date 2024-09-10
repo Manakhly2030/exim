@@ -3,12 +3,12 @@
 
 let set_currency = 0;
 
-this.frm.add_fetch('forward_contract', 'booking_rate', 'forward_rate');
-this.frm.add_fetch('forward_contract', 'amount', 'forward_amount');
-this.frm.add_fetch('forward_contract', 'maturity_from', 'maturity_from');
-this.frm.add_fetch('forward_contract', 'maturity_to', 'maturity_to');
-this.frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_outstanding');
-this.frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_utilized');
+cur_frm.add_fetch('forward_contract', 'booking_rate', 'forward_rate');
+cur_frm.add_fetch('forward_contract', 'amount', 'forward_amount');
+cur_frm.add_fetch('forward_contract', 'maturity_from', 'maturity_from');
+cur_frm.add_fetch('forward_contract', 'maturity_to', 'maturity_to');
+cur_frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_outstanding');
+cur_frm.add_fetch('forward_contract', 'amount_outstanding', 'amount_utilized');
 
 cur_frm.fields_dict.funding_bank.get_query = function(doc) {
 	return {
