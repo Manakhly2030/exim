@@ -24,13 +24,14 @@
    "default": "0",
    "fieldname": "use_advance_authorization_license_based_on_cas_no_of_item",
    "fieldtype": "Check",
+   "ignore_user_permissions": 1,
    "label": "Use Advance Authorization License based on CAS No of Item"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-09-05 12:37:03.597881",
+ "modified": "2024-09-18 16:06:19.817045",
  "modified_by": "Administrator",
  "module": "Exim",
  "name": "Exim Settings",
@@ -43,6 +44,36 @@
    "print": 1,
    "read": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Local Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Accounts User",
    "share": 1,
    "write": 1
   }
