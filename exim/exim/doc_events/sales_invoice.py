@@ -225,7 +225,9 @@ def create_jv_with_gst(self):
                     "debit_in_account_currency": 0,
                     "party_type": "Customer",
                     "party": self.customer,
-                    "cost_center":self.cost_center
+                    "cost_center":self.cost_center,
+                    "reference_type": self.doctype,
+                    "reference_name": self.name,
                 },
                 {
                     "account": company_gst_payable_account,
