@@ -1,3 +1,5 @@
+from frappe.utils import add_months, get_last_day, add_days
+
 def get_due_date(term, posting_date=None, bill_date=None):
 	due_date = None
 	date = bill_date or posting_date
