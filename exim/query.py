@@ -3,7 +3,7 @@ import frappe
 @frappe.whitelist()
 def get_invoce_no(doctype, txt, searchfield, start, page_len, filters):
 	if filters.get("invoice_no"):
-		return frappe.db.sql(f"""select distinct parent from `tabPayment Entry Reference` where reference_name = '{filters.get('invoice_no')}' """)
+		return frappe.db.sql(f"""select distinct parent from `tabPayment Entry Reference` where reference_name = '{filters.get('invoice_no')}' and docstatus = 1 """)
 	
 
 @frappe.whitelist()

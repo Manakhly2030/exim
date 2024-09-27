@@ -14,7 +14,6 @@ cur_frm.set_query("voucher_no", "brc_payment", function(doc,cdt,cdn) {
 			query: "exim.query.get_invoce_no",
 			filters: {
 				'invoice_no': doc.invoice_no,
-				'docstatus': 1
 			}
 			}
 	}
