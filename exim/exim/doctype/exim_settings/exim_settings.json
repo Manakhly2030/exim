@@ -9,7 +9,9 @@
  "field_order": [
   "exim_tab",
   "section_break_pe5qs",
-  "use_advance_authorization_license_based_on_cas_no_of_item"
+  "use_advance_authorization_license_based_on_cas_no_of_item",
+  "column_break_arcq7",
+  "round_off_values"
  ],
  "fields": [
   {
@@ -28,12 +30,22 @@
    "fieldname": "section_break_pe5qs",
    "fieldtype": "Section Break",
    "label": "License Setting"
+  },
+  {
+   "fieldname": "column_break_arcq7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "round_off_values",
+   "fieldtype": "Check",
+   "label": "Round off Values"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-09-05 12:25:32.857366",
+ "modified": "2024-10-16 14:02:32.546008",
  "modified_by": "Administrator",
  "module": "Exim",
  "name": "Exim Settings",
