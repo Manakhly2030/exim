@@ -346,6 +346,7 @@ def create_jv(self):
                                 "account": drawback_receivable_account,
                                 "cost_center": drawback_cost_center,
                                 "debit_in_account_currency": round(self.total_duty_drawback),
+                                "cost_center": self.cost_center
                             },
                         )
                         jv.append(
@@ -354,6 +355,7 @@ def create_jv(self):
                                 "account": drawback_income_account,
                                 "cost_center": drawback_cost_center,
                                 "credit_in_account_currency": round(self.total_duty_drawback),
+                                "cost_center": self.cost_center
                             },
                         )
                     else:
@@ -363,6 +365,7 @@ def create_jv(self):
                                 "account": drawback_receivable_account,
                                 "cost_center": drawback_cost_center,
                                 "debit_in_account_currency": self.total_duty_drawback,
+                                "cost_center": self.cost_center
                             },
                         )
                         jv.append(
@@ -371,6 +374,7 @@ def create_jv(self):
                                 "account": drawback_income_account,
                                 "cost_center": drawback_cost_center,
                                 "credit_in_account_currency":self.total_duty_drawback,
+                                "cost_center": self.cost_center
                             },
                         )
                     try:
@@ -417,6 +421,7 @@ def create_jv(self):
                             "account": meis_receivable_account,
                             "cost_center": meis_cost_center,
                             "debit_in_account_currency": round(self.total_meis),
+                            "cost_center": self.cost_center
                         },
                     )
                     meis_jv.append(
@@ -425,6 +430,7 @@ def create_jv(self):
                             "account": meis_income_account,
                             "cost_center": meis_cost_center,
                             "credit_in_account_currency": round(self.total_meis),
+                            "cost_center": self.cost_center
                         },
                     )
                 else:
@@ -434,6 +440,7 @@ def create_jv(self):
                             "account": meis_receivable_account,
                             "cost_center": meis_cost_center,
                             "debit_in_account_currency": self.total_meis,
+                            "cost_center": self.cost_center
                         },
                     )
                     meis_jv.append(
@@ -442,6 +449,7 @@ def create_jv(self):
                             "account": meis_income_account,
                             "cost_center": meis_cost_center,
                             "credit_in_account_currency": self.total_meis,
+                            "cost_center": self.cost_center
                         },
                     )
                 try:
